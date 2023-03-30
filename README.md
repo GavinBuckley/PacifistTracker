@@ -1,4 +1,4 @@
-# Spelunky2 Pacifist Tracker
+# Spelunky 2 Pacifist Tracker
 This is a mod created for DougDoug's Spelunky Pacifist playthrough.
 
 ## Features
