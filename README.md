@@ -29,3 +29,4 @@ This mod requires both [Modlunky2](https://github.com/spelunky-fyi/modlunky2) an
   - Above the array there is a function with a random number generator. Make sure the max number is equal to the number of quips there are.
   - Save the file
   - In Modlunky, click "Refresh Mods"
+- While in game, you can press CTRL + F4 to bring up the options menu
