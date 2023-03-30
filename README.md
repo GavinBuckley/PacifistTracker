@@ -1,1 +1,1 @@
-# Spelunky2_Pacifist--Tracker
+# Spelunky2_Pacifist-Tracker
