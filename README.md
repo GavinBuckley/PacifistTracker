@@ -22,6 +22,7 @@ This mod requires both [Modlunky2](https://github.com/spelunky-fyi/modlunky2) an
 
 ## Usage
 - Ensure the mod is selected and click "Play!"
+- While in game, you can press CTRL + F4 to bring up the options menu
 - (Optional) If you want to add custom quips to the death screen you can make the changes as follows:
   - Open main.lua in the text editor of your choice
   - At the bottom of the file, there should be an array titled "death_quips"
@@ -29,4 +30,4 @@ This mod requires both [Modlunky2](https://github.com/spelunky-fyi/modlunky2) an
   - Above the array there is a function with a random number generator. Make sure the max number is equal to the number of quips there are.
   - Save the file
   - In Modlunky, click "Refresh Mods"
-- While in game, you can press CTRL + F4 to bring up the options menu
+
