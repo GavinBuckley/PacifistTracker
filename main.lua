@@ -1,5 +1,5 @@
 meta.name = "Pacifist Tracker"
-meta.version = "1.0"
+meta.version = "1.1"
 meta.description = "Made for DougDoug's Pacifist playthrough."
 meta.author = "litttlehawk"
 
@@ -164,6 +164,7 @@ death_quips = {
 
 }
 
+set_callback(win, ON.SPACESHIP)
 set_callback(notdead, ON.LEVEL)
 set_callback(reset, ON.START)
 set_callback(reset, ON.RESET)
