@@ -111,6 +111,14 @@ end, ON.RENDER_POST_HUD)
 function notdead()
 
     dead = 0
+    start = 1
+  
+end
+
+-- Tells the mod not to draw anything during the spaceship cutscene
+function win()
+
+    dead = 1
 
 end
 
