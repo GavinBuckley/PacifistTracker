@@ -1,5 +1,5 @@
 meta.name = "Pacifist Tracker"
-meta.version = "1.1"
+meta.version = "1.2"
 meta.description = "Made for DougDoug's Pacifist playthrough."
 meta.author = "litttlehawk"
 
@@ -43,7 +43,7 @@ end
 -- Draws and updates the kill count, icon, and text
 set_callback(function(render_ctx)
 
-    if show() and dead == 0 then
+    if show() and playersalive() and dead == 0 then
 
         -- Makes the kill counter turn invisible after a period of time
         if players[1].inventory.kills_total > internalkills or start == 1 then
@@ -105,10 +105,19 @@ set_callback(function()
 
     end
 
+-- Checks to see if the player has been killed by instakill enemies like the ghost or Olmec
+function playersalive()
+    if players[1] ~= nil then
+        return true
+    else
+        return false
+    end
+end    
+    
 end, ON.RENDER_POST_HUD)
 
 -- Tells the game that you're not dead on the first frame of the level and the code can begin running
-function notdead()
+function levelcheck()
 
     dead = 0
     start = 1
@@ -165,6 +174,6 @@ death_quips = {
 }
 
 set_callback(win, ON.SPACESHIP)
-set_callback(notdead, ON.LEVEL)
+set_callback(levelcheck, ON.LEVEL)
 set_callback(reset, ON.START)
 set_callback(reset, ON.RESET)
