@@ -1,5 +1,5 @@
 meta.name = "Pacifist Tracker"
-meta.version = "1.2"
+meta.version = "1.3"
 meta.description = "Made for DougDoug's Pacifist playthrough."
 meta.author = "litttlehawk"
 
@@ -11,6 +11,7 @@ box_alpha = 0
 last_ms = 0 
 timer = 0
 start = 1
+gamestarted = 0
 dead = 1
 deathquipid = 0
 
@@ -43,50 +44,54 @@ end
 -- Draws and updates the kill count, icon, and text
 set_callback(function(render_ctx)
 
-    if show() and playersalive() and dead == 0 then
+    if gamestarted == 1 then 
 
-        -- Makes the kill counter turn invisible after a period of time
-        if players[1].inventory.kills_total > internalkills or start == 1 then
+        if show() and playersalive() and dead == 0 then
 
-            last_ms = get_ms()
-            timer = 1
-            text_alpha = 1 
-            box_alpha = 1
-            internalkills = players[1].inventory.kills_total
+            -- Makes the kill counter turn invisible after a period of time
+            if players[1].inventory.kills_total > internalkills or start == 1 then
 
-            if start == 1 then
+                last_ms = get_ms()
+                timer = 1
+                text_alpha = 1 
+                box_alpha = 1
+                internalkills = players[1].inventory.kills_total
 
-                start = 0
+                if start == 1 then
 
-            end
+                    start = 0
 
-        end
-
-
-        if get_ms() - last_ms >= 3500 then
-
-            if timer >= .5 then
-
-                box_alpha = box_alpha - .02
-                text_alpha = text_alpha - .01
-                timer = timer - .01
+                end
 
             end
 
+
+            if get_ms() - last_ms >= 3500 then
+
+                if timer >= .5 then
+
+                    box_alpha = box_alpha - .02
+                    text_alpha = text_alpha - .01
+                    timer = timer - .01
+
+                end
+
+            end
+
+            -- Draw box for kill count
+            render_ctx:draw_screen_texture(TEXTURE.DATA_TEXTURES_HUD_0, 0, 4, .1675, 0.925, .2575 , 0.785, Color:new(1,1,1,box_alpha))
+            render_ctx:draw_screen_texture(TEXTURE.DATA_TEXTURES_HUD_0, 0, 5, .2575, 0.925, .3275 , 0.785, Color:new(1,1,1,box_alpha))
+            render_ctx:draw_screen_texture(TEXTURE.DATA_TEXTURES_HUD_0, 0, 6, .3275, 0.925, .4175 , 0.785, Color:new(1,1,1,box_alpha))
+
+            -- Draw skull icon
+            render_ctx:draw_screen_texture(TEXTURE.DATA_TEXTURES_HUD_0, 1, 7, .13, 0.927, .22 , 0.786, white)
+
+            -- Draw kill count
+            render_ctx:draw_text(F'{players[1].inventory.kills_total}', 0.22, .856, 0.0006, 0.0006, Color:new(1,1,1,text_alpha), VANILLA_TEXT_ALIGNMENT.LEFT, VANILLA_FONT_STYLE.BOLD)
+
         end
 
-        -- Draw box for kill count
-        render_ctx:draw_screen_texture(TEXTURE.DATA_TEXTURES_HUD_0, 0, 4, .1675, 0.925, .2575 , 0.785, Color:new(1,1,1,box_alpha))
-        render_ctx:draw_screen_texture(TEXTURE.DATA_TEXTURES_HUD_0, 0, 5, .2575, 0.925, .3275 , 0.785, Color:new(1,1,1,box_alpha))
-        render_ctx:draw_screen_texture(TEXTURE.DATA_TEXTURES_HUD_0, 0, 6, .3275, 0.925, .4175 , 0.785, Color:new(1,1,1,box_alpha))
-
-        -- Draw skull icon
-        render_ctx:draw_screen_texture(TEXTURE.DATA_TEXTURES_HUD_0, 1, 7, .13, 0.927, .22 , 0.786, white)
-
-        -- Draw kill count
-        render_ctx:draw_text(F'{players[1].inventory.kills_total}', 0.22, .856, 0.0006, 0.0006, Color:new(1,1,1,text_alpha), VANILLA_TEXT_ALIGNMENT.LEFT, VANILLA_FONT_STYLE.BOLD)
-
-    end
+    end    
 
 end, ON.RENDER_POST_HUD)
 
@@ -121,6 +126,7 @@ function levelcheck()
 
     dead = 0
     start = 1
+    gamestarted = 1
   
 end
 
